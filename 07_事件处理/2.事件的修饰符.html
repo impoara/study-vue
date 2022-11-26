@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件的修饰符</title>
+		<script type="text/javascript" src="../js/vue.js"></script>
+		<style>
+			*{
+				margin-top: 20px;
+			}
+			.demo1{
+				height: 50px;
+				background-color: skyblue;
+			}
+			.box1{
+				padding: 5px;
+				background-color: skyblue;
+			}
+			.box2{
+				padding: 5px;
+				background-color: orange;
+			}
+			.list{
+				width: 200px;
+				height: 200px;
+				background-color: peru;
+				overflow: auto;
+			}
+			li{
+				height: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			Vue中的事件修饰符:
+				1.prevent:阻止默认事件(常用);
+				2.stop:阻止事件冒泡(常用);
+				3.once:事件只触发一次(常用);
+				4.capture:使用事件的捕获模式,使用后捕获接着触发事件,不会等着捕获完后再冒泡触发;
+				5.self:只有event.target是当前操作的元素时才触发事件;
+				6.passive:事件的默认行为立即执行,无需等待事件回调执行完毕;
+		-->
+		<div id="root">
+			<h2>欢迎来到{{name}}学习</h2>
+			<!-- prevent:阻止默认事件(常用) -->
+			<a href="http://www.baidu.com" @click.prevent="showInfo">点我提示信息</a>
+			
+			<!-- stop:阻止事件冒泡(常用) -->
+			<div class="demo1" @click="showInfo">
+				<button @click.stop="showInfo">点我提示信息</button>
+			</div>
+			
+			<!-- once:事件只触发一次(常用); -->
+			<button @click.once="showInfo">点我提示信息</button>
+			
+			<!-- capture:使用事件的捕获模式; -->
+			<div class="box1" @click.capture="showMsg(1)">
+				div1
+				<div class="box2" @click="showMsg(2)">
+					div2
+				</div>
+			</div>
+			
+			<!-- self:只有event.target是当前操作的元素时才触发事件; -->
+			<div class="demo1" @click.self="showInfo1">
+				<button @click="showInfo1">点我提示信息</button>
+			</div>
+			
+			<!-- passive:事件的默认行为立即执行,无需等待事件回调执行完毕; -->
+			<!-- @scroll 是滚动条的触发(常用) ,不会导致事件执行完后再滚动条滚动-->
+			<!-- @wheel 是鼠标滚轮的触发;事件执行完滚动条再动,加了passive就没这问题了 -->
+			<ul @wheel.passive="demo" class="list">
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.config.productionTip = false
+		
+		const vm = new Vue({
+			el:'#root',
+			data:{
+				name:'齐鲁理工学院'
+			},
+			methods:{
+				showInfo(e){//	e是event
+					// e.preventDefault()// 阻止默认行为
+					// 也可在标签处用 @click.prevent="showInfo" 的.prevent
+					// e.stopPropagation()// 阻止冒泡(同一事件触发多次)
+					// 也可将 @click 改为 @click.stop="showInfo"的 stop,若div外面还有触发事件,则div也要加.stop
+					alert("同学你好!")
+				},
+				showMsg(msg){
+					// 捕获阶段:由外往内,冒泡阶段:由内往外;
+					console.log(msg)
+				},
+				showInfo1(e){
+					console.log(e.target)
+					// alert("同学你好!")
+				},
+				demo(){
+					for(let i = 0; i<5000; i++){
+						console.log('#')
+					}
+					console.log('完了')
+				}
+			}
+		})
+	</script>
+</html>

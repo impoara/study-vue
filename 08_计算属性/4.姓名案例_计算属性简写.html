@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>姓名案例_计算属性实现</title>
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			姓:<input type="text" v-model="firstName" /><br />
+			名:<input type="text" v-model="lastName" /><br />
+			测试:<input type="text" v-model="x" /><br />
+			全名:<span>{{fullName}}</span>
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.config.productionTip = false
+		
+		const vm = new Vue({
+			el:'#root',
+			data:{
+				firstName:'赵',
+				lastName:'四',
+				x:'你好'
+			},
+			computed:{
+					// 简写,只做读取不做修改
+					fullName:function(){// fullName是计算属性的名字,function中的内容比作getter
+						console.log('get被调用')
+						return this.firstName + '-' + this.lastName
+					}
+				}
+		})
+	</script>
+</html>

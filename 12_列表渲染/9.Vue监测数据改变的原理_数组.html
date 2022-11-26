@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue监测数据改变的原理</title>
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<!--
+		对数组进行修改:
+			1.push 	:向数组末尾新增一个元素
+			2.pop 	:删除最后一个元素
+			3.shift :删除第一个元素
+			4.unshift:在头部添加一个元素
+			5.splice:在指定位置(添加、删除、更改、替换)一个元素
+			6.sort 	:对数组进行排序
+			7.reverse:反转一个数组
+	 -->
+	<body>
+		<div id="root">
+			<h2>学校名称:{{name}}</h2>
+			<h2>学校地址:{{address}}</h2>
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.config.productionTip = false
+		
+		const vm = new Vue({
+			el:'#root',
+			data:{
+				name:'齐鲁理工',
+				address:'济南章丘'
+			}
+		})
+	</script>
+</html>

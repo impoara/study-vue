@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>el与data的两种写法</title>
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<h1>你好,{{name}}</h1>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		Vue.config.productionTip = false
+		
+		const v = new Vue({
+			//el:'#root',
+			//data第一种写法:对象式-----------
+			// data:{
+			// 	name:'赵天雨'
+			// },
+			//data第二种写法:函数式-----------
+			data:function(){
+				return{
+					name:'赵天雨'
+				}
+			}
+		})
+		console.log('@@@',v)//v是Vue实例对象
+		//setTimeout(() => {	定时器
+		v.$mount('#root')
+		//},1000)
+	</script>
+</html>

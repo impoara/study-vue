@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>天气案例</title>
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<h2>今天天气很{{info}}</h2>
+			<button @click="isHot = !isHot ">切换天气</button><br />
+			<button @click="window.alert('ok') ">显示弹窗</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.config.productionTip = false
+		
+		const vm = new Vue({
+			el:'#root',
+			data:{
+				isHot:true,
+				window:window	//可以在在标签中直接用窗口的方法了
+			},
+			computed:{
+				info(){
+					return this.isHot ? '炎热' : '凉爽'
+				}
+			},
+			methods:{
+				// changeWeather(){
+				// 	this.isHot = !this.isHot
+				// }
+			}
+		})
+	</script>
+</html>

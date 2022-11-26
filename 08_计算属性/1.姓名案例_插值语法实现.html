@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>姓名案例_插值语法实现</title>
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			姓:<input type="text" v-model="firstName" /><br />
+			名:<input type="text" v-model="lastName" /><br />
+			全名:<span>{{firstName.slice(0,3)}}-{{lastName}}</span>
+								<!-- slice(0,3) 只要第0到2个元素 -->
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.config.productionTip = false
+		
+		const vm = new Vue({
+			el:'#root',
+			data:{
+				firstName:'赵',
+				lastName:'四'
+			}
+		})
+	</script>
+</html>
